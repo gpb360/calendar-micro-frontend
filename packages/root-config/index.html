@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Org App</title>
-  
-  <!-- SystemJS -->
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-
-  <!-- Import map -->
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@your-org/root-config": "//localhost:9000/your-org-root-config.js",
-        "@your-org/calendar-app": "//localhost:3003/calendar-app.system.js",
-        "@your-org/shared-ui": "//localhost:3002/shared-ui.js",
-        "@your-org/state-management": "//localhost:3001/state-management.system.js",
-        "react": "https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js",
-        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js",
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar App</title>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+          "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
+          "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
+          "single-spa-react": "https://cdn.jsdelivr.net/npm/single-spa-react@6.0.1/lib/system/single-spa-react.min.js",
+          "@your-org/root-config": "/your-org-root-config.js",
+          "@your-org/calendar-app": "//127.0.0.1:3003/calendar-app.system.js",
+          "@your-org/shared-ui": "//127.0.0.1:3002/shared-ui.system.js",
+          "@your-org/state-management": "//127.0.0.1:3001/state-management.system.js"
+        }
       }
-    }
-  </script>
-</head>
-<body>
-  <!-- Container for micro-frontends -->
-  <div id="single-spa-application:@your-org/calendar-app"></div>
-
-  <!-- Load the root config -->
-  <script>
-    System.import('@your-org/root-config');
-  </script>
-</body>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  </head>
+  <body>
+    <div id="single-spa-application:@your-org/calendar-app"></div>
+    <script>
+      System.import('@your-org/root-config').catch((err) => {
+        console.error('Error loading root config:', err);
+      });
+    </script>
+  </body>
 </html>

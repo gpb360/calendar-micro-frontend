@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.tsx'), // adjust this path if necessary
+      entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'SharedUI',
       fileName: 'shared-ui.system',
       formats: ['system'],
@@ -21,5 +21,7 @@ export default defineConfig({
   },
   server: {
     port: 3002,
+    host: '0.0.0.0',
+    cors: true
   },
 })

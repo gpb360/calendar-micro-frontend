@@ -6,7 +6,8 @@
     "preview": "vite preview --port 9000"
   },
   "dependencies": {
-    "single-spa": "^5.9.0"
+    "single-spa": "^6.0.1",
+    "single-spa-react": "^6.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
