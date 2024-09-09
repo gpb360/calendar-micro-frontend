@@ -1,57 +1,41 @@
+// packages/calendar-app/src/App.tsx
+
 import React, { useState } from 'react';
-import { Button, TaskDialog } from '@your-org/shared-ui';
-import { useTaskStore, Task } from '@your-org/state-management';
-import { format } from 'date-fns';
+import { TaskDialog, Task } from '@your-org/shared-ui';
+import { useTaskStore } from '@your-org/state-management';
 
 const App: React.FC = () => {
-  const { tasks, addTask, updateTaskStatus, deleteTask } = useTaskStore();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const { tasks, addTask, updateTask, deleteTask } = useTaskStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editTask, setEditTask] = React.useState<Task | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  const handleOpenDialog = (task: Task | null = null) => {
-    setEditTask(task);
-    setIsDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setEditTask(null);
-    setIsDialogOpen(false);
-  };
-  const handleUpdateTask = (taskData: Task) => {
-    updateTaskStatus(taskData.id, taskData.status);
-    setIsDialogOpen(false);
-  };
-
-  const handleSaveTask = (taskData: Partial<Task>) => {
-    if (editTask) {
-      updateTaskStatus({
-        id: editTask.id,
-        status: taskData.status as Task['status'],
-      });
+  const handleSaveTask = (taskData: Omit<Task, 'id' | 'status'> | (Partial<Task> & Pick<Task, 'id'>)) => {
+    if ('id' in taskData) {
+      updateTask(taskData.id, taskData);
     } else {
-      addTask(taskData as Omit<Task, 'id' | 'status'>);
+      addTask(taskData);
     }
-    handleCloseDialog();
+    setIsDialogOpen(false);
+  };
+
+  const handleDeleteTask = (id: string) => {
+    deleteTask(id);
   };
 
   return (
     <div>
-      <h1>Calendar App</h1>
-      <Button onClick={() => handleOpenDialog()}>Add New Task</Button>
-      {tasks.map((task: Task) => (
+      {tasks.map((task) => (
         <div key={task.id}>
-          <h3>{task.title}</h3>
-          <p>Date: {format(new Date(task.datetime), 'PPpp')}</p>
-          <p>Status: {task.status}</p>
-          <Button onClick={() => handleOpenDialog(task)}>Edit</Button>
-          <Button onClick={() => deleteTask(task.id)}>Delete</Button>
+          <span>{task.title}</span>
+          <button onClick={() => setSelectedTask(task)}>Edit</button>
+          <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
         </div>
       ))}
+      <button onClick={() => setIsDialogOpen(true)}>Add New Task</button>
       <TaskDialog
         open={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
-        onSave={selectedTask ? handleUpdateTask : handleAddTask}
+        onSave={handleSaveTask}
         task={selectedTask}
         mode={selectedTask ? 'edit' : 'add'}
       />

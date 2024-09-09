@@ -23,16 +23,10 @@ var tasksAtom = atom([]);
 export var useTaskStore = function () {
     var _a = useAtom(tasksAtom), tasks = _a[0], setTasks = _a[1];
     var addTask = function (newTask) {
-        setTasks(function (prevTasks) { return __spreadArray(__spreadArray([], prevTasks, true), [
-            __assign(__assign({}, newTask), { id: Date.now().toString() }),
-        ], false); });
+        setTasks(function (prevTasks) { return __spreadArray(__spreadArray([], prevTasks, true), [__assign(__assign({}, newTask), { id: Date.now().toString(), status: 'scheduled' })], false); });
     };
     var updateTask = function (id, updatedTask) {
-        setTasks(function (prevTasks) {
-            return prevTasks.map(function (task) {
-                return task.id === id ? __assign(__assign({}, task), updatedTask) : task;
-            });
-        });
+        setTasks(function (prevTasks) { return prevTasks.map(function (task) { return (task.id === id ? __assign(__assign({}, task), updatedTask) : task); }); });
     };
     var deleteTask = function (id) {
         setTasks(function (prevTasks) { return prevTasks.filter(function (task) { return task.id !== id; }); });

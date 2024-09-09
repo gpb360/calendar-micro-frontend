@@ -10,12 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React from 'react';
-import { DateTimePicker, } from '@mui/x-date-pickers/DateTimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import TextField from '@mui/material/TextField';
-/**
- * A strongly-typed `DateTimePicker` component with a `TextField`-rendered input.
- *
- * @param props - The props to pass to the underlying `DateTimePicker` component.
- * @returns A `DateTimePicker` component with a `TextField`-rendered input.
- */
-export var CustomDateTimePicker = function (props) { return (React.createElement(DateTimePicker, __assign({}, props, { renderInput: function (params) { return React.createElement(TextField, __assign({}, params)); } }))); };
+export var CustomDateTimePicker = function (props) { return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDateFns },
+    React.createElement(DateTimePicker, __assign({}, props, { renderInput: function (params) { return React.createElement(TextField, __assign({}, params)); } })))); };

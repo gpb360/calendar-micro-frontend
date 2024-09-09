@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
-import { resolve } from 'path';
+import path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -12,13 +12,9 @@ export default defineConfig({
     }),
   ],
   build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.tsx'),
-      name: 'SharedUI',
-      formats: ['es', 'umd'],
-      fileName: (format) => `shared-ui.${format}.js`,
-    },
     rollupOptions: {
+      input: 'src/index.tsx',
+      preserveEntrySignatures: 'strict',
       external: [
         'react',
         'react-dom',
@@ -29,6 +25,8 @@ export default defineConfig({
         'date-fns',
       ],
       output: {
+        format: 'system',
+        entryFileNames: 'shared-ui.system.js',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
@@ -39,6 +37,11 @@ export default defineConfig({
           'date-fns': 'dateFns',
         },
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });

@@ -59,6 +59,8 @@ export default defineConfig({
           null,
           2,
         )}</script>`;
+
+        const 
         return html.replace('</head>', `${importMapScript}</head>`);
       },
     },

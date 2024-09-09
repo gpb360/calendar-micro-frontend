@@ -6,21 +6,22 @@
       "@your-org/state-management": ["../state-management/src"]
     },
     "typeRoots": ["./node_modules/@types", "./src/types"],
-    "target": "es5",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
-    
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }

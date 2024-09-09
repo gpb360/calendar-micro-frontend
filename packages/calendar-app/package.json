@@ -1,37 +1,28 @@
 {
   "name": "@your-org/calendar-app",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "./dist/calendar-app.system.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "type-check": "tsc --noEmit"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "single-spa": "^5.9.5",
-    "single-spa-react": "^6.0.1",
-    "date-fns": "^2.30.0",
     "@your-org/shared-ui": "workspace:*",
-    "@your-org/state-management": "workspace:*"
+    "@your-org/state-management": "workspace:*",
+    "single-spa-react": "^4.3.1"
   },
   "devDependencies": {
-    "@types/react": "^17.0.53",
-    "@types/react-dom": "^17.0.19",
-    "vite": "^4.3.9",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "@vitejs/plugin-react": "^1.3.2",
-    "eslint": "^8.44.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.1",
-    "typescript": "^4.9.5",
-    "prettier": "^2.8.8",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1"
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@vitejs/plugin-react": "^1.0.7",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2"
   }
 }
