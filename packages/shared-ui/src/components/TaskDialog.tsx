@@ -1,32 +1,57 @@
-import React from 'react'
-import { 
-  Button, TextField, Dialog, DialogActions, DialogContent, 
-  DialogTitle, Select, MenuItem, FormControl, InputLabel
-} from '@mui/material'
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import * as React from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
+import { CustomDateTimePicker } from './CustomDateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
+interface Task {
+  title: string;
+  datetime: Date | null;
+  status: string;
+}
 
 interface TaskDialogProps {
   open: boolean;
   onClose: () => void;
-  onSave: (task: any) => void;
-  task: any | null;
+  onSave: (task: Task) => void;
+  task: Task | null;
   mode: 'add' | 'edit';
 }
 
-export const TaskDialog: React.FC<TaskDialogProps> = ({ open, onClose, onSave, task, mode }) => {
-  const [title, setTitle] = React.useState(task?.title || '')
-  const [datetime, setDatetime] = React.useState<Date | null>(task?.datetime || new Date())
-  const [status, setStatus] = React.useState(task?.status || 'scheduled')
+export const TaskDialog: React.FC<TaskDialogProps> = ({
+  open,
+  onClose,
+  onSave,
+  task,
+  mode,
+}) => {
+  const [title, setTitle] = React.useState(task?.title || '');
+  const [datetime, setDatetime] = React.useState<Date | null>(
+    task?.datetime || new Date(),
+  );
+  const [status, setStatus] = React.useState(task?.status || 'scheduled');
 
   const handleSave = () => {
-    onSave({ title, datetime, status })
-    onClose()
-  }
+    onSave({ title, datetime, status });
+    onClose();
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{mode === 'edit' ? 'Edit Task' : 'Add New Task'}</DialogTitle>
+      <DialogTitle>
+        {mode === 'edit' ? 'Edit Task' : 'Add New Task'}
+      </DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -34,13 +59,16 @@ export const TaskDialog: React.FC<TaskDialogProps> = ({ open, onClose, onSave, t
           label="Task Title"
           fullWidth
           value={title}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTitle(e.target.value)
+          }
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DateTimePicker
+          <CustomDateTimePicker
             label="Date & Time"
             value={datetime}
             onChange={(newValue: Date | null) => setDatetime(newValue)}
+            renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
         {mode === 'edit' && (
@@ -63,5 +91,5 @@ export const TaskDialog: React.FC<TaskDialogProps> = ({ open, onClose, onSave, t
         <Button onClick={handleSave}>Save</Button>
       </DialogActions>
     </Dialog>
-  )
-}
+  );
+};

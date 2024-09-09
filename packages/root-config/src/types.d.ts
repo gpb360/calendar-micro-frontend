@@ -1,3 +1,3 @@
 declare const System: {
-    import<T = any>(module: string): Promise<T>;
-  };
+  import<T = any>(module: string): Promise<T>;
+};

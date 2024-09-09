@@ -1,25 +1,30 @@
-import { defineConfig } from 'vite'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'), // adjust this path if necessary
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'StateManagement',
-      fileName: 'state-management.system',
-      formats: ['system'],
+      fileName: (format) => `state-management.${format}.js`,
     },
     rollupOptions: {
-      external: ['jotai', 'react'], // add any other external dependencies
+      external: ['react', 'react-dom', 'jotai'],
       output: {
-        format: 'system',
-        entryFileNames: 'state-management.system.js',
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          jotai: 'jotai',
+        },
       },
     },
   },
-  server: {
-    port: 3001,
-    host: '0.0.0.0',
-    cors: true
-  },
-})
+});

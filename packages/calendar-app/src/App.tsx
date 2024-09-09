@@ -1,40 +1,45 @@
-import React from 'react'
-import { Button, TaskDialog } from '@your-org/shared-ui'
-import { useTasksAtom, useAddTask, useUpdateTaskStatus, useDeleteTask, Task } from '@your-org/state-management'
-import { format } from 'date-fns'
+import React, { useState } from 'react';
+import { Button, TaskDialog } from '@your-org/shared-ui';
+import { useTaskStore, Task } from '@your-org/state-management';
+import { format } from 'date-fns';
 
 const App: React.FC = () => {
-  const [tasks] = useTasksAtom()
-  const addTask = useAddTask()
-  const updateTaskStatus = useUpdateTaskStatus()
-  const deleteTask = useDeleteTask()
-  const [openDialog, setOpenDialog] = React.useState(false)
-  const [editTask, setEditTask] = React.useState<Task | null>(null)
+  const { tasks, addTask, updateTaskStatus, deleteTask } = useTaskStore();
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editTask, setEditTask] = React.useState<Task | null>(null);
 
   const handleOpenDialog = (task: Task | null = null) => {
-    setEditTask(task)
-    setOpenDialog(true)
-  }
+    setEditTask(task);
+    setIsDialogOpen(true);
+  };
 
   const handleCloseDialog = () => {
-    setEditTask(null)
-    setOpenDialog(false)
-  }
+    setEditTask(null);
+    setIsDialogOpen(false);
+  };
+  const handleUpdateTask = (taskData: Task) => {
+    updateTaskStatus(taskData.id, taskData.status);
+    setIsDialogOpen(false);
+  };
 
   const handleSaveTask = (taskData: Partial<Task>) => {
     if (editTask) {
-      updateTaskStatus({ id: editTask.id, status: taskData.status as Task['status'] })
+      updateTaskStatus({
+        id: editTask.id,
+        status: taskData.status as Task['status'],
+      });
     } else {
-      addTask(taskData as Omit<Task, 'id' | 'status'>)
+      addTask(taskData as Omit<Task, 'id' | 'status'>);
     }
-    handleCloseDialog()
-  }
+    handleCloseDialog();
+  };
 
   return (
     <div>
       <h1>Calendar App</h1>
       <Button onClick={() => handleOpenDialog()}>Add New Task</Button>
-      {tasks.map(task => (
+      {tasks.map((task: Task) => (
         <div key={task.id}>
           <h3>{task.title}</h3>
           <p>Date: {format(new Date(task.datetime), 'PPpp')}</p>
@@ -44,14 +49,14 @@ const App: React.FC = () => {
         </div>
       ))}
       <TaskDialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        onSave={handleSaveTask}
-        task={editTask}
-        mode={editTask ? 'edit' : 'add'}
+        open={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onSave={selectedTask ? handleUpdateTask : handleAddTask}
+        task={selectedTask}
+        mode={selectedTask ? 'edit' : 'add'}
       />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

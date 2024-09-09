@@ -1,27 +1,44 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+      include: ['src'],
+    }),
+  ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.tsx'),
+      entry: resolve(__dirname, 'src/index.tsx'),
       name: 'SharedUI',
-      fileName: 'shared-ui.system',
-      formats: ['system'],
+      formats: ['es', 'umd'],
+      fileName: (format) => `shared-ui.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/x-date-pickers', '@emotion/react', '@emotion/styled', 'date-fns'],
+      external: [
+        'react',
+        'react-dom',
+        '@mui/material',
+        '@emotion/react',
+        '@emotion/styled',
+        '@mui/x-date-pickers',
+        'date-fns',
+      ],
       output: {
-        format: 'system',
-        entryFileNames: 'shared-ui.system.js',
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          '@mui/material': 'MaterialUI',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
+          '@mui/x-date-pickers': 'MuiXDatePickers',
+          'date-fns': 'dateFns',
+        },
       },
     },
   },
-  server: {
-    port: 3002,
-    host: '0.0.0.0',
-    cors: true
-  },
-})
+});

@@ -1,40 +1,35 @@
-import { atom, useAtom } from 'jotai'
+import { atom, useAtom } from 'jotai';
 
 export interface Task {
-  id: string
-  title: string
-  datetime: Date
-  status: 'scheduled' | 'completed' | 'rescheduled' | 'canceled'
+  id: string;
+  title: string;
+  datetime: Date;
+  status: string;
 }
 
-const tasksAtom = atom<Task[]>([])
+const tasksAtom = atom<Task[]>([]);
 
-export const useTasksAtom = () => useAtom(tasksAtom)
+export const useTaskStore = () => {
+  const [tasks, setTasks] = useAtom(tasksAtom);
 
-export const useAddTask = () => {
-  const [, setTasks] = useAtom(tasksAtom)
-  return (newTask: Omit<Task, 'id' | 'status'>) => {
-    setTasks((tasks) => [
-      ...tasks,
-      { ...newTask, id: Math.random().toString(36).substr(2, 9), status: 'scheduled' }
-    ])
-  }
-}
+  const addTask = (newTask: Omit<Task, 'id'>) => {
+    setTasks((prevTasks: Task[]) => [
+      ...prevTasks,
+      { ...newTask, id: Date.now().toString() },
+    ]);
+  };
 
-export const useUpdateTaskStatus = () => {
-  const [, setTasks] = useAtom(tasksAtom)
-  return (update: { id: string; status: Task['status'] }) => {
-    setTasks((tasks) =>
-      tasks.map((task) =>
-        task.id === update.id ? { ...task, status: update.status } : task
-      )
-    )
-  }
-}
+  const updateTask = (id: string, updatedTask: Partial<Task>) => {
+    setTasks((prevTasks: Task[]) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, ...updatedTask } : task,
+      ),
+    );
+  };
 
-export const useDeleteTask = () => {
-  const [, setTasks] = useAtom(tasksAtom)
-  return (id: string) => {
-    setTasks((tasks) => tasks.filter((task) => task.id !== id))
-  }
-}
+  const deleteTask = (id: string) => {
+    setTasks((prevTasks: Task[]) => prevTasks.filter((task) => task.id !== id));
+  };
+
+  return { tasks, addTask, updateTask, deleteTask };
+};

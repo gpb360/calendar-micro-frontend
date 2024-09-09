@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -19,36 +18,24 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useDeleteTask = exports.useUpdateTaskStatus = exports.useAddTask = exports.useTasksAtom = void 0;
-var jotai_1 = require("jotai");
-var tasksAtom = (0, jotai_1.atom)([]);
-var useTasksAtom = function () { return (0, jotai_1.useAtom)(tasksAtom); };
-exports.useTasksAtom = useTasksAtom;
-var useAddTask = function () {
-    var _a = (0, jotai_1.useAtom)(tasksAtom), setTasks = _a[1];
-    return function (newTask) {
-        setTasks(function (tasks) { return __spreadArray(__spreadArray([], tasks, true), [
-            __assign(__assign({}, newTask), { id: Math.random().toString(36).substr(2, 9), status: 'scheduled' })
+import { atom, useAtom } from 'jotai';
+var tasksAtom = atom([]);
+export var useTaskStore = function () {
+    var _a = useAtom(tasksAtom), tasks = _a[0], setTasks = _a[1];
+    var addTask = function (newTask) {
+        setTasks(function (prevTasks) { return __spreadArray(__spreadArray([], prevTasks, true), [
+            __assign(__assign({}, newTask), { id: Date.now().toString() }),
         ], false); });
     };
-};
-exports.useAddTask = useAddTask;
-var useUpdateTaskStatus = function () {
-    var _a = (0, jotai_1.useAtom)(tasksAtom), setTasks = _a[1];
-    return function (update) {
-        setTasks(function (tasks) {
-            return tasks.map(function (task) {
-                return task.id === update.id ? __assign(__assign({}, task), { status: update.status }) : task;
+    var updateTask = function (id, updatedTask) {
+        setTasks(function (prevTasks) {
+            return prevTasks.map(function (task) {
+                return task.id === id ? __assign(__assign({}, task), updatedTask) : task;
             });
         });
     };
-};
-exports.useUpdateTaskStatus = useUpdateTaskStatus;
-var useDeleteTask = function () {
-    var _a = (0, jotai_1.useAtom)(tasksAtom), setTasks = _a[1];
-    return function (id) {
-        setTasks(function (tasks) { return tasks.filter(function (task) { return task.id !== id; }); });
+    var deleteTask = function (id) {
+        setTasks(function (prevTasks) { return prevTasks.filter(function (task) { return task.id !== id; }); });
     };
+    return { tasks: tasks, addTask: addTask, updateTask: updateTask, deleteTask: deleteTask };
 };
-exports.useDeleteTask = useDeleteTask;

@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar App Test</title>
-    {
-      "imports": {
-        "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
-        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-        "single-spa-react": "https://cdn.jsdelivr.net/npm/single-spa-react@6.0.1/lib/system/single-spa-react.min.js",
-        "@your-org/calendar-app": "http://127.0.0.1:3003/calendar-app.system.js",
-        "@your-org/shared-ui": "http://127.0.0.1:3002/shared-ui.system.js",
-        "@your-org/state-management": "http://127.0.0.1:3001/state-management.system.js"
-      }
-    }
+    { "imports": { "react":
+    "https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js",
+    "react-dom":
+    "https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js",
+    "single-spa":
+    "https://cdn.jsdelivr.net/npm/single-spa@6.0.1/lib/system/single-spa.min.js",
+    "single-spa-react":
+    "https://cdn.jsdelivr.net/npm/single-spa-react@6.0.1/lib/system/single-spa-react.min.js",
+    "@your-org/calendar-app": "http://127.0.0.1:3003/calendar-app.system.js",
+    "@your-org/shared-ui": "http://127.0.0.1:3002/shared-ui.system.js",
+    "@your-org/state-management":
+    "http://127.0.0.1:3001/state-management.system.js" } }
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="calendar-app"></div>
     <script>
       System.import('@your-org/calendar-app')
-        .then(module => {
+        .then((module) => {
           console.log('Calendar app module loaded:', module);
           if (module.mount && typeof module.mount === 'function') {
-            module.mount({ domElement: document.getElementById('calendar-app') });
+            module.mount({
+              domElement: document.getElementById('calendar-app'),
+            });
           } else {
             console.error('Mount function not found in calendar app module');
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('Error loading calendar app:', err);
         });
     </script>
-</body>
+  </body>
 </html>

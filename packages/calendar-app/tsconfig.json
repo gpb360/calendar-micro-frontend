@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@your-org/shared-ui": ["../shared-ui/src"],
+      "@your-org/state-management": ["../state-management/src"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -13,8 +19,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    
   },
   "include": ["src"]
 }

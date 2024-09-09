@@ -1,22 +1,27 @@
-import React from 'react'
-import { 
-  Button, TextField, Dialog, DialogActions, DialogContent, 
-  DialogTitle, Select, MenuItem, FormControl, InputLabel
-} from '@mui/material'
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
+export { TaskDialog } from './components/TaskDialog';
+export { CustomDateTimePicker } from './components/CustomDateTimePicker';
+export { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+export { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+export { TextField, Button, Dialog } from '@mui/material';
 
-export { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem, FormControl, InputLabel }
-
-export const StyledDateTimePicker: React.FC<{
-  label: string;
-  value: Date | null;
-  onChange: (date: Date | null) => void;
-}> = (props) => (
-  <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DateTimePicker {...props} />
-  </LocalizationProvider>
-)
+export {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+};
 
 interface TaskDialogProps {
   open: boolean;
@@ -26,54 +31,4 @@ interface TaskDialogProps {
   mode: 'add' | 'edit';
 }
 
-export const TaskDialog: React.FC<TaskDialogProps> = ({ open, onClose, onSave, task, mode }) => {
-  const [title, setTitle] = React.useState(task?.title || '')
-  const [datetime, setDatetime] = React.useState<Date | null>(task?.datetime || new Date())
-  const [status, setStatus] = React.useState(task?.status || 'scheduled')
-
-  const handleSave = () => {
-    onSave({ title, datetime, status })
-    onClose()
-  }
-
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{mode === 'edit' ? 'Edit Task' : 'Add New Task'}</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Task Title"
-          fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <StyledDateTimePicker
-          label="Date & Time"
-          value={datetime}
-          onChange={(newValue: Date | null) => setDatetime(newValue)}
-        />
-        {mode === 'edit' && (
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Status</InputLabel>
-            <Select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <MenuItem value="scheduled">Scheduled</MenuItem>
-              <MenuItem value="completed">Completed</MenuItem>
-              <MenuItem value="rescheduled">Rescheduled</MenuItem>
-              <MenuItem value="canceled">Canceled</MenuItem>
-            </Select>
-          </FormControl>
-        )}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave}>Save</Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
-
-export type { TaskDialogProps }
+export type { TaskDialogProps };
