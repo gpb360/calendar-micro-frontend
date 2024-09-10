@@ -10,7 +10,7 @@ export default defineConfig({
         entryFileNames: 'state-management.system.js',
       },
       preserveEntrySignatures: 'strict',
-      external: ['react', 'jotai'],
+      external: ['react', 'react-dom'],
     },
     target: 'esnext',
     minify: false,

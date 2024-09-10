@@ -1,7 +1,7 @@
 // packages/calendar-app/src/App.tsx
 
 import React, { useState } from 'react';
-import { TaskDialog, Task } from '@your-org/shared-ui';
+import { TaskDialog, Task, ThemeProvider, CssBaseline, theme, Button } from '@your-org/shared-ui';
 import { useTaskStore } from '@your-org/state-management';
 
 const App: React.FC = () => {
@@ -27,11 +27,11 @@ const App: React.FC = () => {
       {tasks.map((task) => (
         <div key={task.id}>
           <span>{task.title}</span>
-          <button onClick={() => setSelectedTask(task)}>Edit</button>
-          <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+          <Button onClick={() => setSelectedTask(task)}>Edit</Button>
+          <Button onClick={() => handleDeleteTask(task.id)}>Delete</Button>
         </div>
       ))}
-      <button onClick={() => setIsDialogOpen(true)}>Add New Task</button>
+      <Button onClick={() => setIsDialogOpen(true)}>Add New Task</Button>
       <TaskDialog
         open={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
@@ -42,5 +42,12 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+export const ThemedApp = (props) => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <App {...props} />
+  </ThemeProvider>
+);
 
 export default App;

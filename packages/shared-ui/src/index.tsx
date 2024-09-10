@@ -6,7 +6,12 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  ThemeProvider,
+  CssBaseline,
+  Card,
+  Typography,
 } from '@mui/material';
+import { default as theme } from './theme';
 export { TaskDialog } from './components/TaskDialog';
 export { CustomDateTimePicker } from './components/CustomDateTimePicker';
 export { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -21,5 +26,7 @@ export {
   MenuItem,
   FormControl,
   InputLabel,
+  ThemeProvider,
+  CssBaseline,
+  theme,
 };
-

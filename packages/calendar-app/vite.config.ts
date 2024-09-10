@@ -4,23 +4,26 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@your-org/shared-ui': path.resolve(__dirname, '../shared-ui/src'),
+      '@your-org/state-management': path.resolve(__dirname, '../state-management/src'),
+    },
+  },
   build: {
+    target: 'esnext',
     rollupOptions: {
-      input: 'src/index.tsx',
+      input: 'src/your-org-calendar-app.tsx',
+      preserveEntrySignatures: 'strict',
       output: {
         format: 'system',
         entryFileNames: 'calendar-app.system.js',
       },
-      preserveEntrySignatures: 'strict',
+
       external: ['react', 'react-dom', '@your-org/shared-ui', '@your-org/state-management', 'single-spa-react'],
     },
-    target: 'esnext',
+
     minify: false,
     cssCodeSplit: false,
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
   },
 });

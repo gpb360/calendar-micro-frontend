@@ -15,15 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: 'src/index.tsx',
       preserveEntrySignatures: 'strict',
-      external: [
-        'react',
-        'react-dom',
-        '@mui/material',
-        '@emotion/react',
-        '@emotion/styled',
-        '@mui/x-date-pickers',
-        'date-fns',
-      ],
+      external: ['react', 'react-dom', '@mui/material', 'date-fns'],
       output: {
         format: 'system',
         entryFileNames: 'shared-ui.system.js',
@@ -31,13 +23,17 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
           '@mui/material': 'MaterialUI',
-          '@emotion/react': 'emotionReact',
-          '@emotion/styled': 'emotionStyled',
-          '@mui/x-date-pickers': 'MuiXDatePickers',
           'date-fns': 'dateFns',
         },
       },
+      target: 'esnext',
+      minify: false,
     },
+  },
+  server: {
+    port: 3002,
+    host: '0.0.0.0',
+    cors: true,
   },
   resolve: {
     alias: {
