@@ -30,6 +30,49 @@ The project consists of the following microfrontends:
    pnpm install
    ```
 
+## Simple Web Server Setup
+
+For serving the production build or running the app locally without the development environment, you can use Simple Web Server. This is a lightweight, easy-to-use web server application.
+
+### Setting up Simple Web Server
+
+1. Download Simple Web Server:
+
+   - Visit https://simplewebserver.org/
+   - Download the appropriate version for your operating system (Windows, macOS, or Linux)
+
+2. Install Simple Web Server:
+
+   - For Windows: Run the downloaded .exe file
+   - For macOS: Open the .dmg file and drag the application to your Applications folder
+   - For Linux: Extract the downloaded .tar.gz file
+
+3. Run Simple Web Server:
+
+   - Launch the Simple Web Server application
+   - Click on the "Select Folder" button and choose your project's root directory (where your `index.html` is located)
+   - The server will start automatically, and you'll see the local URL (usually `http://localhost:8000`)
+
+4. Access your application:
+   - Open your web browser
+   - Navigate to the URL provided by Simple Web Server (e.g., `http://localhost:8000`)
+
+### Configuration (if needed)
+
+- To change the port: Click on the port number in the Simple Web Server interface and enter a new port number
+- To enable HTTPS: Click on the "HTTPS" toggle in the interface (Note: This uses a self-signed certificate)
+
+### CORS Considerations
+
+When using Simple Web Server, you might encounter CORS (Cross-Origin Resource Sharing) issues, especially if your microfrontends are served from different origins. To resolve this:
+
+1. In the Simple Web Server interface, click on the "CORS" toggle to enable CORS headers
+2. For more specific CORS configurations, you may need to use a different server solution
+
+Remember to update your `importmap.json` and other configuration files to point to the correct URLs when using Simple Web Server.
+
+[... Rest of the previous content remains the same ...]
+
 ## Setup
 
 1. Update the `importmap.json` file in the root directory to ensure all microfrontends and dependencies are correctly mapped for both development and production environments.
