@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -18,14 +20,23 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@jest/types": "^29.6.3",
     "@mui/material": "^6.0.2",
     "@mui/x-date-pickers": "^5.0.20",
     "date-fns": "^2.29.3"
   },
   "devDependencies": {
-    "@types/react": "^17.0.53",
-    "@types/react-dom": "^17.0.19",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "jest": "^27.5.1",
+    "jest-environment-jsdom": "^27.5.1",
+    "ts-jest": "^27.1.5",
     "typescript": "^4.9.5",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"
