@@ -1,9 +1,9 @@
 {
   "imports": {
     "@your-org/root-config": "/your-org-root-config.js",
-    "@your-org/calendar-app": "http://localhost//calendar-app.system.js",
-    "@your-org/shared-ui": "http://localhost/shared-ui.system.js",
-    "@your-org/state-management": "http://localhost/state-management.system.js",
+    "@your-org/calendar-app": "http://localhost:3001//calendar-app.system.js",
+    "@your-org/shared-ui": "http://localhost:3002/shared-ui.system.js",
+    "@your-org/state-management": "http://localhost:3003/state-management.system.js",
     "jotai": "https://cdn.jsdelivr.net/npm/jotai@2.0.3/umd/index.production.js",
     "@mui/material": "https://cdn.jsdelivr.net/npm/@mui/material@6.0.2/umd/material-ui.production.min.js",
     "@mui/icons-material": "https://cdn.jsdelivr.net/npm/@mui/icons-material@5.11.16/index.js",

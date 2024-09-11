@@ -10,6 +10,7 @@
     "dev": "pnpm -r run dev",
     "build": "pnpm -r run build",
     "lint": "eslint ./packages --ext .js,.jsx,.ts,.tsx",
+    "prod": "vite build && vite preview --mode production",
     "format": "prettier --write \"packages/**/*.{js,jsx,ts,tsx}\""
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 // vite.config.js
-import { defineConfig } from 'vite'
-import * as path from 'path'
+import { defineConfig } from 'vite';
+import * as path from 'path';
 
 export default defineConfig({
   root: 'src',
@@ -20,7 +20,7 @@ export default defineConfig({
       name: 'singleSPA',
       resolveId(source) {
         if (source === 'single-spa') {
-          return path.resolve(__dirname, 'node_modules/single-spa/lib/system/single-spa.min.js')
+          return path.resolve(__dirname, 'node_modules/single-spa/lib/system/single-spa.min.js');
         }
       },
     },
@@ -28,4 +28,4 @@ export default defineConfig({
   server: {
     port: 9000,
   },
-})
+});
