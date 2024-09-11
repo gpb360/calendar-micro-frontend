@@ -13,3 +13,5 @@ export const CustomDateTimePicker: React.FC<CustomDateTimePickerProps> = (props)
     <DateTimePicker {...props} renderInput={(params: TextFieldProps) => <TextField {...params} />} />
   </LocalizationProvider>
 );
+
+export default CustomDateTimePicker;

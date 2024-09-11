@@ -15,15 +15,13 @@ export default defineConfig({
     rollupOptions: {
       input: 'src/index.tsx',
       preserveEntrySignatures: 'strict',
-      external: ['react', 'react-dom', '@mui/material', 'date-fns'],
+      external: ['react', 'react-dom'],
       output: {
         format: 'system',
         entryFileNames: 'shared-ui.system.js',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@mui/material': 'MaterialUI',
-          'date-fns': 'dateFns',
         },
       },
       target: 'esnext',

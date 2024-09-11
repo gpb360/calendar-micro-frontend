@@ -20,3 +20,7 @@ export const useTaskStore = () => {
 
   return { tasks, addTask, updateTask, deleteTask };
 };
+
+export { calendarStore } from './calendar-store';
+export { useEvents, useIsLoading, useAddEvent, useRemoveEvent } from './calendar-store';
+export type { Event } from './calendar-store';

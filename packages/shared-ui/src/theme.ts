@@ -1,19 +1,35 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
 
-// A custom theme for this app
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#1976d2',
     },
     secondary: {
-      main: '#19857b',
+      main: '#dc004e',
     },
-    error: {
-      main: red.A400,
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 500,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
     },
   },
 });
 
+// We're not using default export anymore
 export default theme;
