@@ -71,6 +71,34 @@ When using Simple Web Server, you might encounter CORS (Cross-Origin Resource Sh
 
 Remember to update your `importmap.json` and other configuration files to point to the correct URLs when using Simple Web Server.
 
+#### MICRO FRONTEND SERVER SETUP
+
+Enable CORS
+
+## root-config
+1. Select folder path: packages\root-config\dist
+2. Port: 9000
+3. Select Advanced and Set CORS headers to True
+
+## calendar-app
+1. Select folder path: packages\root-config\dist
+2. Port: 3003
+3. Basic Options select Single page rewrite /calendar-app.system.js
+4. Select Advanced and Set CORS headers to True
+   
+## shared-ui
+1. Select folder path: packages\root-config\dist
+2. Port: 3002
+3. 3. Basic Options select Single page rewrite /shared-ui.system.js
+4. Select Advanced and Set CORS headers to True
+## state-management 
+1. Select folder path: packages\root-config\dist
+2. Port: 3001
+3. 3. Basic Options select Single page rewrite /state-management.system.js
+4. Select Advanced and Set CORS headers to True
+
+
+
 [... Rest of the previous content remains the same ...]
 
 ## Setup
