@@ -71,7 +71,7 @@ When using Simple Web Server, you might encounter CORS (Cross-Origin Resource Sh
 
 Remember to update your `importmap.json` and other configuration files to point to the correct URLs when using Simple Web Server.
 
-#### MICRO FRONTEND SERVER SETUP
+# MICRO FRONTEND SERVER SETUP
 
 Enable CORS
 
